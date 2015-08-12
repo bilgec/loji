@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1439374414777
+Build-Jdk: 1.7.0_79
+Built-By: eb
+Bundle-Description: Odoo ile iletisim kuran api
+Bundle-ManifestVersion: 2
+Bundle-Name: LojiPlatform Fuse Rest API
+Bundle-SymbolicName: com.turkjava.lojiplatform.fuse-rest-api
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: io.fabric8.lojiplatform.rest;uses:="org.apache.xmlrpc.cl
+ ient,com.google.gson,org.apache.camel";version="1.0.0.SNAPSHOT"
+Import-Package: com.google.gson;version="[2.3,3)",org.apache.camel;versi
+ on="[2.15,3)",org.apache.xmlrpc.client,org.osgi.service.blueprint;versi
+ on="[1.0.0,2.0.0)"
+Tool: Bnd-1.50.0
