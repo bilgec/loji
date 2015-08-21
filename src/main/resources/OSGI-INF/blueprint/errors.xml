@@ -6,32 +6,50 @@
              http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
              http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
 
-	<bean id="RestProcessor" class="io.fabric8.lojiplatform.rest.RestProcessor" />
+	<bean id="RestProcessor" class="io.fabric8.lojiplatform.rest.RestProcessor"
+		scope="singleton" />
 
-	<camelContext id="lojiplatform-api-context"
-		xmlns="http://camel.apache.org/schema/blueprint">
-
-		<route>
-			<from
-				uri="restlet:http://localhost:8282/products/{productId}?restletMethod=GET" />
-			<log message="${header.productId} icin get metodu calisti" />
-			<bean ref="RestProcessor" method="getProduct" />
-		</route>
-
-		<route>
-			<from
-				uri="restlet:http://localhost:8282/customers/{customerName}?restletMethod=GET" />
-			<log message="${header.customerName} icin get metodu calisti" />
-			<bean ref="RestProcessor" method="getCustomer" />
-		</route>
-
-		<route>
-			<from
-				uri="restlet:http://localhost:8282/orders/{orderId}?restletMethod=GET" />
-			<log message="${header.orderId} icin get metodu calisti" />
-			<bean ref="RestProcessor" method="getOrder" />
-		</route>
-
-	</camelContext>
+	<camelContext id="lojiplatform-api-context" xmlns="http://camel.apache.org/schema/blueprint">
+  <route>
+    <from uri="restlet:http://localhost:8282/products/{productId}?restletMethod=GET"/>
+    <log message="${header.productId} icin getProduct metodu calisti"/>
+    <bean ref="RestProcessor" method="getProduct"/>
+  </route>
+  <route>
+    <from uri="restlet:http://localhost:8282/customers/{customerId}?restletMethod=GET"/>
+    <log message="${header.customerId} icin getCustomer metodu calisti"/>
+    <bean ref="RestProcessor" method="getCustomer"/>
+  </route>
+  <route>
+    <from uri="restlet:http://localhost:8282/customers/search/?restletMethod=POST"/>
+    <log message="${header.customerName} icin getCustomerName metodu calisti"/>
+    <bean ref="RestProcessor" method="getCustomerName"/>
+  </route>
+  <route>
+    <from uri="restlet:http://localhost:8282/orders/{orderId}?restletMethod=GET"/>
+    <log message="${header.orderId} icin getOrder metodu calisti"/>
+    <bean ref="RestProcessor" method="getOrder"/>
+  </route>
+  <route>
+    <from uri="restlet:http://localhost:8282/orders/search/?restletMethod=POST"/>
+    <log message="${header.orderName} icin getOrderName metodu calisti"/>
+    <bean ref="RestProcessor" method="getOrderName"/>
+  </route>
+  <route>
+    <from uri="restlet:http://localhost:8282/orders/{orderId}/products?restletMethod=GET"/>
+    <log message="${header.orderId} icin list listOrderProduct metodu calisti"/>
+    <bean ref="RestProcessor" method="listOrderProduct"/>
+  </route>
+  <route>
+    <from uri="restlet:http://localhost:8282/orders/addproduct/?restletMethod=POST"/>
+    <log message="${header.orderId} icin addOrderProduct metodu calisti"/>
+    <bean ref="RestProcessor" method="addOrderProduct"/>
+  </route>
+  <route>
+    <from uri="restlet:http://localhost:8282/orders/deleteproduct/?restletMethod=POST"/>
+    <log message="${header.orderId} icin deleteOrderProduct metodu calisti"/>
+    <bean ref="RestProcessor" method="deleteOrderProduct"/>
+  </route>
+</camelContext>
 
 </blueprint>
